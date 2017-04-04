@@ -19,4 +19,4 @@ RomanCalculator-test: RomanCalculator-test.o RomanConverter.o
 	gcc -o RomanCalculator-test RomanConverter.o RomanCalculator-test.o $(LIBS) -lm -lrt -lpthread
 
 RomanCalculator-test.o: RomanCalculator-test.c RomanConverter.h
-	gcc $(CFLAGS)-c RomanCalculator-test.c
+	gcc $(CFLAGS) -c RomanCalculator-test.c

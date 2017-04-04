@@ -13,6 +13,6 @@
 
 int romanToInt(char *number);
 
-char *(intToRoman)(int i);
+void intToRoman(int num, char* res);
 
 #endif /* ROMANCONVERTER_H_ */

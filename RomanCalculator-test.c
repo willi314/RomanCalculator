@@ -13,14 +13,33 @@
  *      Author: Alex Williams
  */
  
- #include "RomanConverter.h"
  #include <string.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include "RomanConverter.h"
  
 START_TEST(romanToIntTest)
 {
 #line 12
  	fail_unless(romanToInt("i") == 1);
  	fail_unless(romanToInt("I") == 1);
+ 	
+}
+END_TEST
+
+START_TEST(intToRomanTest)
+{
+#line 16
+	char num[10] = "";
+	intToRoman(3999, num);
+	printf("input = %s", num);
+ 	fail_unless(strcmp(num,"MMMCMXCIX") == 0, "%s does not equal MMMCMXCIX", num);
+ 	num[0] = '\0';
+ 	intToRoman(1, num);
+ 	fail_unless(strcmp(num,"I") == 0, "%s does not equal I", num);
+ 	num[0] = '\0';
+ 	intToRoman(3444, num);
+ 	fail_unless(strcmp(num,"MMMCDXLIV") == 0, "%s does not equal MMMCDKLIV", num);
 }
 END_TEST
 
@@ -33,6 +52,7 @@ int main(void)
 
     suite_add_tcase(s1, tc1_1);
     tcase_add_test(tc1_1, romanToIntTest);
+    tcase_add_test(tc1_1, intToRomanTest);
 
     srunner_run_all(sr, CK_ENV);
     nf = srunner_ntests_failed(sr);
