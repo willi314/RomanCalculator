@@ -13,6 +13,10 @@
 
 int romanToInt(char *number);
 
+static int romanSingleDigitValue(char digit);
+
+static int romanCompoundDigitValue(char *digit);
+
 void intToRoman(int num, char* res);
 
 #endif /* ROMANCONVERTER_H_ */

@@ -18,21 +18,34 @@
  #include <stdio.h>
  #include "RomanConverter.h"
  
-START_TEST(romanToIntTest)
+START_TEST(romanToIntTestOne)
 {
-#line 12
- 	fail_unless(romanToInt("i") == 1);
- 	fail_unless(romanToInt("I") == 1);
+#line 14
+ 	fail_unless(romanToInt("i") == 1, "%d is not 1", romanToInt("i"));
+ 	fail_unless(romanToInt("I") == 1, "%d is not 1", romanToInt("I"));
+ 	fail_unless(romanToInt("V") == 5, "%d is not 5", romanToInt("V"));
+ 	fail_unless(romanToInt("X") == 10, "%d is not 10", romanToInt("X"));
+ 	fail_unless(romanToInt("L") == 50, "%d is not 50", romanToInt("L"));
+ 	fail_unless(romanToInt("C") == 100, "%d is not 100", romanToInt("C"));
+ 	fail_unless(romanToInt("D") == 500, "%d is not 500", romanToInt("D"));
+ 	fail_unless(romanToInt("M") == 1000, "%d is not 1000", romanToInt("M"));
+ 	fail_unless(romanToInt("MDCLXVI") == 1666, "%d is not 1666", romanToInt("M"));
+ 	fail_unless(romanToInt("IV") == 4, "%d is not 4", romanToInt("IV"));
+ 	fail_unless(romanToInt("IX") == 9, "%d is not 9", romanToInt("IX"));
+ 	fail_unless(romanToInt("XL") == 40, "%d is not 40", romanToInt("XL"));
+ 	fail_unless(romanToInt("XC") == 90, "%d is not 90", romanToInt("XC"));
+ 	fail_unless(romanToInt("CD") == 400, "%d is not 400", romanToInt("CD"));
+ 	fail_unless(romanToInt("CM") == 900, "%d is not 900", romanToInt("CM"));
+ 	fail_unless(romanToInt("IVIX") == 13, "%d is not 13", romanToInt("CM"));
  	
 }
 END_TEST
 
 START_TEST(intToRomanTest)
 {
-#line 16
-	char num[10] = "";
+#line 32
+ 	char num[10] = "";
 	intToRoman(3999, num);
-	printf("input = %s", num);
  	fail_unless(strcmp(num,"MMMCMXCIX") == 0, "%s does not equal MMMCMXCIX", num);
  	num[0] = '\0';
  	intToRoman(1, num);
@@ -40,6 +53,9 @@ START_TEST(intToRomanTest)
  	num[0] = '\0';
  	intToRoman(3444, num);
  	fail_unless(strcmp(num,"MMMCDXLIV") == 0, "%s does not equal MMMCDKLIV", num);
+ 	num[0] = '\0';
+ 	intToRoman(0, num);
+ 	fail_unless(strcmp(num,"Nulla") == 0, "%s does not equal Nulla", num);
 }
 END_TEST
 
@@ -51,7 +67,7 @@ int main(void)
     int nf;
 
     suite_add_tcase(s1, tc1_1);
-    tcase_add_test(tc1_1, romanToIntTest);
+    tcase_add_test(tc1_1, romanToIntTestOne);
     tcase_add_test(tc1_1, intToRomanTest);
 
     srunner_run_all(sr, CK_ENV);
