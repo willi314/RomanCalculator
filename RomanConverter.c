@@ -41,17 +41,21 @@ int romanToInt(char *number){
 	int compoundSymbolValues[] = {4, 9, 40, 90, 400, 900};
 	//char * compoundSymbols[] = {"CM", "CD", "XC", "XL", "IX", "IV"};
 	char compoundSymbol[3] = "";
-	int result = 0,currentDigit = 0, nextDigit = 0,i;
+	int result = 0,currentDigit = 0, nextDigit = 0,previousCompound = 10, previousDigit = 10, consecutiveDigits = 0, i;
 	for(i = 0; i < strlen(number); i++){
 		currentDigit = romanSingleDigitValue(toupper(number[i]));
 		if(currentDigit == -1) return -1;
 		printf("prelengthcheck %d\n", i);
 		if(i + 1 == strlen(number)){
+			if(previousCompound / 2 == currentDigit / 2) return -1;
 			result += singleSymbolValues[currentDigit];
 		}
 		else{
 			printf("postlengthcheck %d\n", i);
 			nextDigit = romanSingleDigitValue(toupper(number[i+1]));
+			if(nextDigit == currentDigit) consecutiveDigits++;
+			else consecutiveDigits = 0;
+			if(consecutiveDigits == 3 || (currentDigit % 2 == 1 && consecutiveDigits == 1)) return -1;
 			printf("postNextDigitlengthcheck %d\n", i);
 				if(nextDigit > currentDigit){
 					//do substring here, return if -1, else add value
@@ -59,11 +63,18 @@ int romanToInt(char *number){
 					strncpy(compoundSymbol, number + i, 2);
 					printf("%s = compoundSymbol\n", compoundSymbol);
 					currentDigit = romanCompoundDigitValue(compoundSymbol);
-					if(currentDigit == -1) return -1;
-					result += compoundSymbolValues[currentDigit];
+					if(currentDigit + 1 == previousCompound || previousCompound < currentDigit || currentDigit == -1) return -1;
+					if(previousDigit / 2 == currentDigit / 2) return -1;
+					printf("%d, %d\n",previousDigit, currentDigit);
+					previousCompound = currentDigit;
+					result += compoundSymbolValues[previousCompound];
 					i++;
 				}
 				else{
+					printf("precompoundcheck %d\n", i);
+					if(previousCompound / 2 == currentDigit / 2) return -1;
+					printf("previous digit = %d current digit = %d\n", previousDigit, currentDigit);
+					previousDigit = currentDigit;
 					result += singleSymbolValues[currentDigit];
 				}
 		}

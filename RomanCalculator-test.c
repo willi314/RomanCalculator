@@ -36,14 +36,26 @@ START_TEST(romanToIntTestOne)
  	fail_unless(romanToInt("XC") == 90, "%d is not 90", romanToInt("XC"));
  	fail_unless(romanToInt("CD") == 400, "%d is not 400", romanToInt("CD"));
  	fail_unless(romanToInt("CM") == 900, "%d is not 900", romanToInt("CM"));
- 	fail_unless(romanToInt("IVIX") == 13, "%d is not 13", romanToInt("CM"));
+ 	fail_unless(romanToInt("IVIX") == -1, "%d is not -1", romanToInt("IVIX"));
+ 	fail_unless(romanToInt("IXIV") == -1, "%d is not -1", romanToInt("IXIV"));
+ 	fail_unless(romanToInt("IVI") == -1, "%d is not -1", romanToInt("IVI"));
+ 	fail_unless(romanToInt("CMXCIX") == 999, "%d is not 999", romanToInt("CMXCIX"));
+ 	fail_unless(romanToInt("CMXCIIX") == -1, "%d is not -1", romanToInt("CMXCIIX"));
+ 	fail_unless(romanToInt("MCMXCIX") == 1999, "%d is not 1999", romanToInt("MCMXCIX"));
+ 	fail_unless(romanToInt("MCMXCXLIX") == -1, "%d is not -1", romanToInt("MCMXCXLIX"));
+ 	fail_unless(romanToInt("IIII") == -1, "%d is not -1", romanToInt("IIII"));
+ 	fail_unless(romanToInt("VIV") == -1, "%d is not -1", romanToInt("VIV"));
+ 	fail_unless(romanToInt("VV") == -1, "%d is not -1", romanToInt("VV"));
+ 	fail_unless(romanToInt("DD") == -1, "%d is not -1", romanToInt("DD"));
+ 	fail_unless(romanToInt("LL") == -1, "%d is not -1", romanToInt("LL"));
+ 	fail_unless(romanToInt("MMMCMXCIX") == 3999, "%d is not 3999", romanToInt("MMMCMXCIX"));
  	
 }
 END_TEST
 
 START_TEST(intToRomanTest)
 {
-#line 32
+#line 44
  	char num[10] = "";
 	intToRoman(3999, num);
  	fail_unless(strcmp(num,"MMMCMXCIX") == 0, "%s does not equal MMMCMXCIX", num);
