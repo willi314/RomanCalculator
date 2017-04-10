@@ -1,1 +1,15 @@
 This is a Roman Numeral Calculator C program for the embedded development kata for Pillar Technology.
+
+To make the project, navigate to the directory with all project files and run the command:
+
+make -f RomanCalculator.makefile
+
+To run the program after compiling, run the command
+
+./RomanCalculator
+
+To compile and run the tests for the project run the command:
+
+make -f RomanCalculator.makefile test
+
+The test file was generated from RomanCalculator-test.check using checkmk

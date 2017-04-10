@@ -11,12 +11,12 @@
 #ifndef ROMANCONVERTER_H_
 #define ROMANCONVERTER_H_
 
-int romanToInt(char *number);
+int romanToInt(char *num);
 
-static int romanSingleDigitValue(char digit);
+int romanSingleDigitValue(char digit);
 
-static int romanCompoundDigitValue(char *digit);
+int romanCompoundDigitValue(char *digit);
 
-void intToRoman(int num, char* res);
+void intToRoman(int num, char *res);
 
 #endif /* ROMANCONVERTER_H_ */
